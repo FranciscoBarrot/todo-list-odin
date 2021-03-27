@@ -1,10 +1,25 @@
 import todo from './modules/todo'
 import project from './modules/project'
+import interfaceManipulator from './modules/usarInteface'
 import { format, compareAsc } from 'date-fns'
 
-const project1 = project()
-const task1 = todo('task', 'very important', 'today', 'tomorrow', '10')
-project1.addTodo(task1)
+if (localStorage.getItem('tasks') === null) {
+  const defaultProject = project('default')
+  defaultProject.addTodo(
+    todo('Run', 'Run in the park with Fred', 'Tomorrow', 'Low')
+  )
+  defaultProject.addTodo(
+    todo('Cook', 'Buy the ingredientes for lasagna', 'Today', 'Medium')
+  )
+  defaultProject.addTodo(
+    todo(
+      'Sleep',
+      'Go to sleep early, tomorrow is an important day',
+      'Today',
+      'High'
+    )
+  )
+  console.log(defaultProject.getProject())
+}
 
-console.log(format(task1.date, 'MM/dd/yyyy'))
-console.log(project1.getProject())
+interfaceManipulator.navBar()
