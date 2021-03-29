@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #171717;
+  color: #fff;
+  font-family: 'Open Sans', sans-serif;
+}
+
+/* NAVIGATION */
+.nav-container {
+  display: flex;
+  height: 2.5rem;
+  background-color: #101010;
+  align-items: center;
+}
+
+.nav-container button {
+  margin-left: 1rem;
+  background-color: #101010;
+  border: none;
+  text-decoration: none;
+}
+.nav-container button:hover {
+  cursor: pointer;
+}
+
+.nav-container i {
+  font-size: 2rem;
+  color: #fff;
+}

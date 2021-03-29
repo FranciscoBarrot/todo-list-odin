@@ -1,3 +1,4 @@
+import './styles.css'
 import todo from './modules/todo'
 import project from './modules/project'
 import interfaceManipulator from './modules/usarInteface'
