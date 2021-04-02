@@ -1,3 +1,5 @@
+import project from './project'
+
 export default function navBar(doc) {
   const content = doc.getElementById('content')
 
@@ -38,6 +40,13 @@ export default function navBar(doc) {
     inputSubmit.id = 'project-submit-form'
     inputSubmit.value = 'Ok!'
     form.appendChild(inputSubmit)
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault()
+
+      closePopup()
+      form.reset()
+    })
 
     content.appendChild(projectPopup)
   }

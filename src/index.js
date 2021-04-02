@@ -4,6 +4,8 @@ import project from './modules/project'
 import interfaceManipulator from './modules/usarInteface'
 import { format, compareAsc, add } from 'date-fns'
 
+const allProjects = []
+
 if (localStorage.getItem('tasks') === null) {
   const defaultProject = project('default')
   defaultProject.addTodo(
@@ -24,3 +26,7 @@ if (localStorage.getItem('tasks') === null) {
 }
 
 interfaceManipulator.loadNavBar
+
+document.querySelector('.addBtn').addEventListener('click', (e) => {
+  const form = document.getElementById('project-form')
+})
