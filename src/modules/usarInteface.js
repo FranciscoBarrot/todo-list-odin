@@ -1,17 +1,8 @@
 import { add } from 'date-fns'
+import navBar from './navBar'
 
 export default (function interfaceManipulator(doc) {
-  const content = doc.getElementById('content')
+  const loadNavBar = navBar(doc)
 
-  const navBar = () => {
-    const nav = doc.createElement('nav')
-    nav.classList.add('nav-container')
-    const addBtn = doc.createElement('button')
-    addBtn.id = 'addBtn'
-    addBtn.innerHTML = '<i class="fas fa-plus"></i>'
-
-    nav.appendChild(addBtn)
-    content.appendChild(nav)
-  }
-  return { navBar }
+  return Object.assign({}, loadNavBar)
 })(document)

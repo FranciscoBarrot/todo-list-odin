@@ -2,7 +2,7 @@ import './styles.css'
 import todo from './modules/todo'
 import project from './modules/project'
 import interfaceManipulator from './modules/usarInteface'
-import { format, compareAsc } from 'date-fns'
+import { format, compareAsc, add } from 'date-fns'
 
 if (localStorage.getItem('tasks') === null) {
   const defaultProject = project('default')
@@ -23,4 +23,4 @@ if (localStorage.getItem('tasks') === null) {
   console.log(defaultProject.getProject())
 }
 
-interfaceManipulator.navBar()
+interfaceManipulator.loadNavBar
