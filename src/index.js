@@ -1,12 +1,10 @@
 import './styles.css'
-import todo from './modules/todo'
-import project from './modules/project'
-import interfaceManipulator from './modules/usarInteface'
+import allProjects from './modules/allProjects'
+import UI from './modules/DOM/UI'
 import { format, compareAsc, add } from 'date-fns'
+import project from './modules/project'
 
-const allProjects = []
-
-if (localStorage.getItem('tasks') === null) {
+/* if (localStorage.getItem('tasks') === null) {
   const defaultProject = project('default')
   defaultProject.addTodo(
     todo('Run', 'Run in the park with Fred', 'Tomorrow', 'Low')
@@ -23,10 +21,44 @@ if (localStorage.getItem('tasks') === null) {
     )
   )
   console.log(defaultProject.getProject())
-}
+} */
 
-interfaceManipulator.loadNavBar
+const content = document.getElementById('content')
 
-document.querySelector('.addBtn').addEventListener('click', (e) => {
-  const form = document.getElementById('project-form')
+/* NAVBAR */
+content.appendChild(UI.loadNavBar)
+const addProjectBtn = document.getElementById('add-project-btn')
+content.appendChild(UI.loadProjectPopup)
+const projectPopup = document.querySelector('.project-popup')
+
+addProjectBtn.addEventListener('click', () => {
+  projectPopup.classList.remove('undisplayed')
 })
+
+document.getElementById('cancel-project-btn').addEventListener('click', () => {
+  projectPopup.classList.add('undisplayed')
+})
+
+const form = document.getElementById('project-form')
+form.addEventListener('submit', (e) => {
+  e.preventDefault()
+  const inputText = document.getElementById('project-text-form')
+  let name = inputText.value
+  allProjects.addProject(name)
+  setTimeout(1000)
+  displayProjects()
+  projectPopup.classList.add('undisplayed')
+  form.reset()
+})
+
+/* projects */
+content.appendChild(UI.projectsContainer)
+const projectsContainer = document.querySelector('.projects-container')
+
+function displayProjects() {
+  allProjects.getAllProjects().forEach((project) => {
+    const projectContainer = UI.newProjectContainer
+    projectContainer.textContent = project.getName()
+    projectsContainer.appendChild(projectContainer)
+  })
+}

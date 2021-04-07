@@ -52,6 +52,9 @@ body {
   padding: 1rem 2rem;
   font-size: 2rem;
 }
+.undisplayed {
+  display: none;
+}
 .project-popup i {
   cursor: pointer;
   position: relative;
@@ -76,4 +79,10 @@ body {
 
 #project-text-form {
   width: 90%;
+}
+
+/* Projects */
+.projects-container {
+  width: 60%;
+  margin: auto;
 }
