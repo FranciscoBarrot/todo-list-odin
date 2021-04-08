@@ -1,6 +1,5 @@
 import navBar from './navBar'
 import newProjectPopup from './newProjectPopup'
-import projectContainer from './projectUI'
 
 export default (function UI(doc) {
   const loadNavBar = navBar(doc)
@@ -9,12 +8,18 @@ export default (function UI(doc) {
   const projectsContainer = document.createElement('div')
   projectsContainer.classList.add('projects-container')
 
-  const newProjectContainer = projectContainer(doc)
+  const displayProjectCard = (name, index) => {
+    const projectContainer = document.createElement('article')
+    projectContainer.classList.add('project-container')
+    projectContainer.textContent = name
+    projectContainer.dataset.index = index
+    return projectContainer
+  }
 
   return {
     loadNavBar,
     loadProjectPopup,
     projectsContainer,
-    newProjectContainer,
+    displayProjectCard,
   }
 })(document)

@@ -1,8 +1,8 @@
 import './styles.css'
+import project from './modules/project'
 import allProjects from './modules/allProjects'
 import UI from './modules/DOM/UI'
 import { format, compareAsc, add } from 'date-fns'
-import project from './modules/project'
 
 /* if (localStorage.getItem('tasks') === null) {
   const defaultProject = project('default')
@@ -32,7 +32,7 @@ content.appendChild(UI.loadProjectPopup)
 const projectPopup = document.querySelector('.project-popup')
 
 addProjectBtn.addEventListener('click', () => {
-  projectPopup.classList.remove('undisplayed')
+  projectPopup.classList.toggle('undisplayed')
 })
 
 document.getElementById('cancel-project-btn').addEventListener('click', () => {
@@ -44,9 +44,13 @@ form.addEventListener('submit', (e) => {
   e.preventDefault()
   const inputText = document.getElementById('project-text-form')
   let name = inputText.value
-  allProjects.addProject(name)
-  setTimeout(1000)
-  displayProjects()
+  let newProject = project(name)
+  allProjects.addProject(newProject)
+  localStorage.setItem('tasks', JSON.stringify(allProjects.getAllProjects()))
+
+  /* display projects */
+  updateProjects()
+
   projectPopup.classList.add('undisplayed')
   form.reset()
 })
@@ -55,10 +59,17 @@ form.addEventListener('submit', (e) => {
 content.appendChild(UI.projectsContainer)
 const projectsContainer = document.querySelector('.projects-container')
 
-function displayProjects() {
-  allProjects.getAllProjects().forEach((project) => {
-    const projectContainer = UI.newProjectContainer
-    projectContainer.textContent = project.getName()
-    projectsContainer.appendChild(projectContainer)
+const updateProjects = () => {
+  projectsContainer.innerHTML = ''
+  allProjects.getAllProjects().forEach((project, index) => {
+    projectsContainer.appendChild(
+      UI.displayProjectCard(project.getName(), index)
+    )
+  })
+
+  document.querySelectorAll('.project-container').forEach((container) => {
+    container.addEventListener('click', () => {
+      alert(container.dataset.index)
+    })
   })
 }

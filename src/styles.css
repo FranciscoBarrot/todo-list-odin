@@ -86,3 +86,15 @@ body {
   width: 60%;
   margin: auto;
 }
+
+.project-container {
+  border: 1px solid #eee;
+  border-radius: 2rem;
+  background-color: #101010;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+  cursor: pointer;
+  margin-top: 2rem;
+}
