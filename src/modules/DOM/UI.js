@@ -1,25 +1,36 @@
-import navBar from './navBar'
+import projectsContainer from './projectsContainer'
 import newProjectPopup from './newProjectPopup'
+import projectCard from './projectCard'
+import projectHeader from './projectHeader'
 
 export default (function UI(doc) {
-  const loadNavBar = navBar(doc)
+  const loadProjectContainer = projectsContainer(doc)
   const loadProjectPopup = newProjectPopup(doc)
 
-  const projectsContainer = document.createElement('div')
-  projectsContainer.classList.add('projects-container')
+  const projectDisplay = document.createElement('div')
+  projectDisplay.classList.add('projects-displayer')
 
-  const displayProjectCard = (name, index) => {
-    const projectContainer = document.createElement('article')
-    projectContainer.classList.add('project-container')
-    projectContainer.textContent = name
-    projectContainer.dataset.index = index
-    return projectContainer
+  const displayProjectCard = projectCard
+
+  const loadTodo = (name) => {
+    const todo = doc.createElement.createElement('div')
+    todo.classList.add('todo')
+    todo.textContent = name
+
+    return todo
   }
 
+  const loadTodoContainer = doc.createElement('div')
+  loadTodoContainer.classList.add('todos-container')
+
+  const loadProjectHeader = projectHeader
+
   return {
-    loadNavBar,
+    loadProjectContainer,
     loadProjectPopup,
-    projectsContainer,
+    projectDisplay,
     displayProjectCard,
+    loadTodoContainer,
+    projectHeader,
   }
 })(document)

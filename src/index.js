@@ -1,32 +1,21 @@
 import './styles.css'
 import project from './modules/project'
-import allProjects from './modules/allProjects'
+/* import allProjects from './modules/allProjects' */
 import UI from './modules/DOM/UI'
 import { format, compareAsc, add } from 'date-fns'
 
-/* if (localStorage.getItem('tasks') === null) {
-  const defaultProject = project('default')
-  defaultProject.addTodo(
-    todo('Run', 'Run in the park with Fred', 'Tomorrow', 'Low')
-  )
-  defaultProject.addTodo(
-    todo('Cook', 'Buy the ingredientes for lasagna', 'Today', 'Medium')
-  )
-  defaultProject.addTodo(
-    todo(
-      'Sleep',
-      'Go to sleep early, tomorrow is an important day',
-      'Today',
-      'High'
-    )
-  )
-  console.log(defaultProject.getProject())
-} */
+let allProjects = []
+/* load stored projecs */
+if (localStorage.getItem('allProjects') !== null) {
+  /* allProjects = JSON.parse(localStorage.getItem('allProjects')) */
+  //aca hay algun problema
+  /* updateProjects() */
+}
 
 const content = document.getElementById('content')
 
-/* NAVBAR */
-content.appendChild(UI.loadNavBar)
+/* PROJECTS CONTAINER */
+content.appendChild(UI.loadProjectContainer)
 const addProjectBtn = document.getElementById('add-project-btn')
 content.appendChild(UI.loadProjectPopup)
 const projectPopup = document.querySelector('.project-popup')
@@ -45,8 +34,8 @@ form.addEventListener('submit', (e) => {
   const inputText = document.getElementById('project-text-form')
   let name = inputText.value
   let newProject = project(name)
-  allProjects.addProject(newProject)
-  localStorage.setItem('tasks', JSON.stringify(allProjects.getAllProjects()))
+  allProjects.push(newProject)
+  /* localStorage.setItem('allProjects', JSON.stringify(allProjects)) */
 
   /* display projects */
   updateProjects()
@@ -55,21 +44,26 @@ form.addEventListener('submit', (e) => {
   form.reset()
 })
 
-/* projects */
-content.appendChild(UI.projectsContainer)
-const projectsContainer = document.querySelector('.projects-container')
+/* PROJECTS */
+content.childNodes[0].appendChild(UI.projectDisplay)
+const projectsContainer = document.querySelector('.projects-displayer')
 
-const updateProjects = () => {
+content.appendChild(UI.loadTodoContainer)
+const todosContainer = document.querySelector('.todos-container')
+
+function updateProjects() {
   projectsContainer.innerHTML = ''
-  allProjects.getAllProjects().forEach((project, index) => {
+  allProjects.forEach((actProject, index) => {
     projectsContainer.appendChild(
-      UI.displayProjectCard(project.getName(), index)
+      UI.displayProjectCard(actProject.getName(), index)
     )
   })
 
   document.querySelectorAll('.project-container').forEach((container) => {
     container.addEventListener('click', () => {
-      alert(container.dataset.index)
+      todosContainer.innerHTML = ''
+      const thisProject = allProjects[container.dataset.index]
+      todosContainer.appendChild(UI.projectHeader(thisProject.getName()))
     })
   })
 }
