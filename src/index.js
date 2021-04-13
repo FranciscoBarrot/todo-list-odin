@@ -1,5 +1,6 @@
 import './styles.css'
 import project from './modules/project'
+import todo from './modules/todo'
 /* import allProjects from './modules/allProjects' */
 import UI from './modules/DOM/UI'
 import { format, compareAsc, add } from 'date-fns'
@@ -72,13 +73,16 @@ function updateProjects() {
 }
 
 /* TODOS */
-content.appendChild(UI.loadTodoContainer)
-const todosContainer = document.querySelector('.todos-container')
+content.appendChild(UI.loadActualProject)
+const actProject = document.querySelector('.actual-project-container')
 
 function displayTodos(container) {
-  todosContainer.innerHTML = ''
+  actProject.innerHTML = ''
   const thisProject = allProjects[container.dataset.index]
-  todosContainer.appendChild(UI.projectHeader(thisProject.getName()))
+  actProject.appendChild(UI.projectHeader(thisProject.getName()))
+
+  actProject.appendChild(UI.loadTodoContainer)
+  const todoContainer = document.querySelector('.todos-container')
 
   document
     .getElementById('change-project-btn')
@@ -87,7 +91,20 @@ function displayTodos(container) {
       projectPopup.classList.toggle('undisplayed')
     })
 
-  thisProject.forEach((todo) => {
-    todosContainer.appendChild(UI.loadTodo())
+  document
+    .getElementById('delete-project-btn')
+    .addEventListener('click', () => {
+      allProjects.splice(container.dataset.index, 1)
+      actProject.innerHTML = ''
+      updateProjects()
+    })
+
+  actProject.appendChild(UI.loadAddTodoBtn)
+  document
+    .getElementById('add-todo-btn')
+    .addEventListener('click', () => alert('hi'))
+
+  thisProject.getProject().forEach((todo) => {
+    todoContainer.appendChild(UI.loadTodo(todo.getTitle()))
   })
 }

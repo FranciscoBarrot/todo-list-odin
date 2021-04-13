@@ -116,7 +116,7 @@ body {
 }
 
 /* TODOS */
-.todos-container {
+.actual-project-container {
   width: 75%;
   padding: 0 1rem;
 }
@@ -139,8 +139,30 @@ body {
 
 #delete-project-btn {
   background-color: #f44336;
+  cursor: pointer;
 }
 
 #change-project-btn {
   background-color: #4caf50;
+  cursor: pointer;
+}
+
+/* add todo btn */
+.add-todo-container {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 0.5rem;
+}
+#add-todo-btn {
+  width: 9rem;
+  height: 1.5rem;
+  outline: none;
+  color: #eee;
+  border: 1px solid #f44336;
+  background-color: #171717;
+  cursor: pointer;
+}
+#add-todo-btn:hover {
+  background-color: #202020;
+  color: #f44336;
 }

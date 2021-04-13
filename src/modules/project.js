@@ -1,6 +1,6 @@
 export default function project(name) {
-  const _name = name
-  const _todosList = []
+  let _name = name
+  let _todosList = []
   const addTodo = (todo) => {
     _todosList.push(todo)
   }
