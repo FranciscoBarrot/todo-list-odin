@@ -114,3 +114,33 @@ body {
 .project-container:hover {
   background-color: #202020;
 }
+
+/* TODOS */
+.todos-container {
+  width: 75%;
+  padding: 0 1rem;
+}
+.project-header {
+  display: flex;
+  justify-content: space-between;
+}
+.todo-btn-container {
+  display: flex;
+  align-items: center;
+}
+.todo-btn {
+  width: 4rem;
+  height: 1.5rem;
+  margin-left: 1rem;
+  outline: none;
+  color: #eee;
+  border: none;
+}
+
+#delete-project-btn {
+  background-color: #f44336;
+}
+
+#change-project-btn {
+  background-color: #4caf50;
+}
