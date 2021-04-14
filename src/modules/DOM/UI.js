@@ -3,6 +3,7 @@ import newProjectPopup from './newProjectPopup'
 import projectCard from './projectCard'
 import projectHeader from './projectHeader'
 import addTodoBtn from './addTodoBtn'
+import todoPopup from './todoPopup'
 
 export default (function UI(doc) {
   const loadProjectContainer = projectsContainer(doc)
@@ -29,7 +30,9 @@ export default (function UI(doc) {
 
   const loadProjectHeader = projectHeader
 
-  const loadAddTodoBtn = addTodoBtn(doc)
+  const loadAddTodoBtn = addTodoBtn
+
+  const loadTodoPopup = todoPopup(doc)
 
   return {
     loadProjectContainer,
@@ -41,5 +44,6 @@ export default (function UI(doc) {
     loadTodo,
     projectHeader,
     loadAddTodoBtn,
+    loadTodoPopup,
   }
 })(document)

@@ -76,14 +76,20 @@ function updateProjects() {
 content.appendChild(UI.loadActualProject)
 const actProject = document.querySelector('.actual-project-container')
 
+content.appendChild(UI.loadTodoPopup)
+const todoPopupContainer = document.getElementById('todo-popup')
+
 function displayTodos(container) {
   actProject.innerHTML = ''
   const thisProject = allProjects[container.dataset.index]
   actProject.appendChild(UI.projectHeader(thisProject.getName()))
 
+  actProject.appendChild(UI.loadAddTodoBtn(document))
+
   actProject.appendChild(UI.loadTodoContainer)
   const todoContainer = document.querySelector('.todos-container')
 
+  /* change and delete btn */
   document
     .getElementById('change-project-btn')
     .addEventListener('click', () => {
@@ -99,10 +105,10 @@ function displayTodos(container) {
       updateProjects()
     })
 
-  actProject.appendChild(UI.loadAddTodoBtn)
-  document
-    .getElementById('add-todo-btn')
-    .addEventListener('click', () => alert('hi'))
+  /* add todo btn */
+  document.getElementById('add-todo-btn').addEventListener('click', () => {
+    todoPopupContainer.classList.toggle('undisplayed')
+  })
 
   thisProject.getProject().forEach((todo) => {
     todoContainer.appendChild(UI.loadTodo(todo.getTitle()))

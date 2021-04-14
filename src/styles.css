@@ -51,7 +51,7 @@ body {
 }
 
 /* PROJECT POPUP */
-.project-popup {
+.popup-container {
   background-color: #101010;
   border-radius: 2rem;
   border: 1px solid #eee;
@@ -68,9 +68,8 @@ body {
 .undisplayed {
   visibility: hidden;
 }
-.project-popup i {
+.popup-container i {
   cursor: pointer;
-  position: relative;
 }
 .popup-top {
   display: flex;
@@ -79,18 +78,18 @@ body {
 }
 
 /* popup form */
-#project-form {
+.form {
   display: flex;
   align-items: center;
   margin-top: 1rem;
 }
 
-#project-text-form,
-#project-submit-form {
+.form-text,
+.form-input {
   font-size: 2rem;
 }
 
-#project-text-form {
+.form-text {
   width: 90%;
 }
 
