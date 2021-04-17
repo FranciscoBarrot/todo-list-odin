@@ -1,24 +1,36 @@
-export default function project(name) {
-  let _name = name
-  let _todosList = []
-  const addTodo = (todo) => {
-    _todosList.push(todo)
+export default function project(name1) {
+  let name = name1
+  let todosList = []
+  /* const addTodo = (todo) => {
+    todosList.push(todo)
   }
-  const deleteTodo = (todo) => {
-    const index = _todosList.indexOf(todo)
+  const deleteTodo = (index) => {
     if (index > -1) {
-      _todosList.splice(index, 1)
+      todosList.splice(index, 1)
     }
   }
   const changeName = (newName) => {
-    _name = newName
+    name = newName
   }
   const getName = () => {
-    return _name
+    return name
   }
   const getProject = () => {
     return _todosList
   }
-  const { forEach } = Array()
-  return { addTodo, deleteTodo, changeName, getName, getProject, forEach }
+  const setProject = (actProject) => {
+    _todosList = actProject
+  }
+  const { forEach } = Array() */
+  return {
+    name,
+    todosList,
+    /* addTodo,
+    deleteTodo,
+    changeName,
+    getName,
+    getProject,
+    setProject,
+    forEach, */
+  }
 }

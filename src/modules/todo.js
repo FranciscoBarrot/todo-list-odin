@@ -8,10 +8,7 @@
   return { title, description, date, dueDate, priority, complete }
 } */
 
-export default function todo(title) {
-  let _title = title
-  const getTitle = () => {
-    return _title
-  }
-  return { getTitle }
+export default function todo(title1) {
+  let title = title1
+  return { title }
 }

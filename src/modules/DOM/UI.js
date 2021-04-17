@@ -4,6 +4,7 @@ import projectCard from './projectCard'
 import projectHeader from './projectHeader'
 import addTodoBtn from './addTodoBtn'
 import todoPopup from './todoPopup'
+import todoContainer from './todoContainer'
 
 export default (function UI(doc) {
   const loadProjectContainer = projectsContainer(doc)
@@ -14,13 +15,7 @@ export default (function UI(doc) {
 
   const displayProjectCard = projectCard
 
-  const loadTodo = (name) => {
-    const todo = doc.createElement('div')
-    todo.classList.add('todo')
-    todo.textContent = name
-
-    return todo
-  }
+  const loadTodo = todoContainer
 
   const loadActualProject = doc.createElement('div')
   loadActualProject.classList.add('actual-project-container')
