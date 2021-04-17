@@ -1,7 +1,6 @@
 import './styles.css'
 import project from './modules/project'
 import todo from './modules/todo'
-/* import allProjects from './modules/allProjects' */
 import UI from './modules/DOM/UI'
 import { format, compareAsc, add } from 'date-fns'
 
@@ -34,22 +33,16 @@ form.addEventListener('submit', (e) => {
   if (form.dataset.index === '-1') {
     allProjects.push(newProject)
   } else {
-    newProject.setProject(allProjects[form.dataset.index].getProject())
+    newProject.todosList = allProjects[form.dataset.index].todosList
     allProjects[form.dataset.index] = newProject
     const projectTitle = document.getElementById('project-title')
     projectTitle.textContent = 'Project: ' + name
   }
-
-  localStorage.setItem('tasks', JSON.stringify(allProjects))
-  /* localStorage.setItem('allProjects', JSON.stringify(allProjects)) */
-
-  console.log(allProjects)
-
-  /* display projects */
   updateProjects()
-
   projectPopup.classList.add('undisplayed')
   form.reset()
+
+  localStorage.setItem('tasks', JSON.stringify(allProjects))
 })
 
 /* PROJECTS */
@@ -59,9 +52,7 @@ const projectsContainer = document.querySelector('.projects-displayer')
 function updateProjects() {
   projectsContainer.innerHTML = ''
   allProjects.forEach((actProject, index) => {
-    projectsContainer.appendChild(
-      UI.displayProjectCard(actProject.getName(), index)
-    )
+    projectsContainer.appendChild(UI.displayProjectCard(actProject.name, index))
   })
 
   document.querySelectorAll('.project-container').forEach((container) => {
@@ -82,10 +73,12 @@ const todoForm = document.getElementById('todo-form')
 todoForm.addEventListener('submit', (e) => {
   e.preventDefault()
   let title = document.getElementById('todo-text-form').value
-  allProjects[todoForm.dataset.index].addTodo(todo(title))
+  allProjects[todoForm.dataset.index].todosList.push(todo(title))
   displayTodos(todoForm.dataset.index)
   todoPopupContainer.classList.add('undisplayed')
   todoForm.reset()
+
+  localStorage.setItem('tasks', JSON.stringify(allProjects))
 })
 
 document.getElementById('cancel-todo-btn').addEventListener('click', () => {
@@ -95,7 +88,7 @@ document.getElementById('cancel-todo-btn').addEventListener('click', () => {
 function displayTodos(projectIndex) {
   actProject.innerHTML = ''
   const thisProject = allProjects[projectIndex]
-  actProject.appendChild(UI.projectHeader(thisProject.getName()))
+  actProject.appendChild(UI.projectHeader(thisProject.name))
 
   actProject.appendChild(UI.loadAddTodoBtn(document))
 
@@ -115,6 +108,7 @@ function displayTodos(projectIndex) {
     .addEventListener('click', () => {
       allProjects.splice(projectIndex, 1)
       actProject.innerHTML = ''
+      localStorage.setItem('tasks', JSON.stringify(allProjects))
       updateProjects()
     })
 
@@ -125,12 +119,13 @@ function displayTodos(projectIndex) {
   })
 
   todoContainer.innerHTML = ''
-  thisProject.getProject().forEach((todo, index) => {
+  thisProject.todosList.forEach((todo, index) => {
     todoContainer.appendChild(UI.loadTodo(todo.title, index))
   })
   document.querySelectorAll('.todo-check-btn').forEach((btn) => {
     btn.addEventListener('click', () => {
-      thisProject.deleteTodo(btn.dataset.index)
+      thisProject.todosList.splice(btn.dataset.index, 1)
+      localStorage.setItem('tasks', JSON.stringify(allProjects))
       displayTodos(projectIndex)
     })
   })
@@ -138,6 +133,6 @@ function displayTodos(projectIndex) {
 
 /* load previous projects */
 if (localStorage.getItem('tasks') !== null) {
-  allProjects = JSON.parse(localStorage.getItem('allProjects'))
+  allProjects = JSON.parse(localStorage.getItem('tasks'))
   updateProjects()
 }
