@@ -193,4 +193,6 @@ body {
 }
 .todo-container-right-side {
   display: flex;
+  justify-content: space-between;
+  width: inherit;
 }

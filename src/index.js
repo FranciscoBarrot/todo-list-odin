@@ -2,7 +2,6 @@ import './styles.css'
 import project from './modules/project'
 import todo from './modules/todo'
 import UI from './modules/DOM/UI'
-import { format, compareAsc, add } from 'date-fns'
 
 let allProjects = []
 /* load stored projecs */

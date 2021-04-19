@@ -8,7 +8,6 @@
   return { title, description, date, dueDate, priority, complete }
 } */
 
-export default function todo(title1) {
-  let title = title1
+export default function todo(title) {
   return { title }
 }
